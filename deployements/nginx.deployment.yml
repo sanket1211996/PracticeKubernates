@@ -6,6 +6,8 @@ metadata:
     app: my-nginx
 spec:
   replicas: 2
+  # Property to wait before diverting traffic, to check if instance didnt crash
+  minReadySeconds: 10
   selector:
     matchLabels:
       app: my-nginx

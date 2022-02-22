@@ -76,5 +76,19 @@ Eg. kubectl scale deployment my-nginx --replicas=5
 # OR by filename
 kubectl scale -f nginx.deployment.yml --replicas=5
 # OR update in spec of YAML file
- 
 
+# To configure minikube to pull image locally:
+1. First set property imagePullPolicy: Never in specs YAML.
+2. Configure minikube to pull image from our local docker registry
+Run Command: minikube docker-env
+It output variable which needed to point to the local docker.
+Like this:
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://127.0.0.1:50024"
+export DOCKER_CERT_PATH="/Users/sanketdarwante/.minikube/certs"
+export MINIKUBE_ACTIVE_DOCKERD="minikube"
+
+To apply these variables, I use the proposed command:
+eval $(minikube -p minikube docker-env)
+Now we have to build the docker image through same terminal or 
+configure this env variable into profile file.
